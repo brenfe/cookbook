@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recipes</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Featured</th>
+      <th scope="col">Ingredients</th>
+      <th scope="col">Steps</th>
+      <th scope="col"><%= link_to "Sumbit date", recipes_path(:sort => true, :by => "sumbit_date", :order => (params[:order] == "asc" ? "desc" : "desc")) %></th>
+      <th scope="col">Image url</th>
+      <th scope="col">Category</th>
+      <th scope="col">Author</th>
+      <th scope="col">Recipe type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td scope="row"><%= recipe.name %></td>
+        <td scope="row"><%= recipe.description %></td>
+        <td scope="row"><%= recipe.featured %></td>
+        <td scope="row"><%= recipe.ingredients %></td>
+        <td scope="row"><%= recipe.steps %></td>
+        <td scope="row"><%= recipe.sumbit_date %></td>
+        <td scope="row"><%= recipe.image_url %></td>
+        <td scope="row"><%= recipe.category.name unless recipe.category.nil? %></td>
+        <td scope="row"><%= recipe.author.last_name unless recipe.author.nil? %></td>
+        <td scope="row"><%= recipe.recipe_type.name unless recipe.author.nil? %></td>
+        <td scope="row"><%= link_to 'Show', recipe %></td>
+        <td scope="row"><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+        <td scope="row"><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recipe', new_recipe_path %>
